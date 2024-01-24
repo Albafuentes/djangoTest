@@ -3,6 +3,9 @@
     <body>
         {% block content %} 
             <div>
+                {% if error %}
+                    <p>The email or password are not correct!</p>
+                {% endif %}
                 <form id="login-form" action="" method="post">
                     {% csrf_token %}
 

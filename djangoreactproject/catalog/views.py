@@ -1,3 +1,4 @@
+
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.contrib.auth import get_user_model, login, authenticate
@@ -5,9 +6,11 @@ from django.contrib.auth.forms import AuthenticationForm
 from django.contrib import messages
 
 
+
 # Create your views here.
 def index(request):
     user = request.session.get('email')
+
     if request.method == 'POST' and not user == None:
         try:
             del request.session['email']
@@ -21,6 +24,7 @@ def index(request):
 
 def login(request):
     User = get_user_model()
+    error = False
     
     if request.method == 'POST':
         user_form = User(email=request.POST.get('username'), password=request.POST.get('password'))
@@ -32,6 +36,7 @@ def login(request):
             return redirect("index")
         
         else: 
-            print('Please enter valid Username or Password.')
-
-    return render(request, 'login.html')
+            error = True
+            
+    context= {'error': error}
+    return render(request, 'login.html', context)
