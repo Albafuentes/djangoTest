@@ -2,7 +2,9 @@
 <html>
     <body>
         {% block content %} 
-        <p>hello {{user}}</p>
+        <p>email: {{user.email}}</p>
+        <p>created_session: {{user.created_session}}</p>
+        
             <form method="post">
                 {% csrf_token %}
                 {{ form.as_p }}

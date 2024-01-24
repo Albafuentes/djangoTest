@@ -1,9 +1,8 @@
-
+from time import gmtime
 from django.shortcuts import render, redirect
-from django.http import HttpResponse
-from django.contrib.auth import get_user_model, login, authenticate
-from django.contrib.auth.forms import AuthenticationForm
-from django.contrib import messages
+from django.contrib.auth import get_user_model
+
+import datetime
 
 
 
@@ -17,8 +16,11 @@ def index(request):
             return redirect('login')
         except:
             print('error')
+            
+    for key, value in request.session.items():
+        print('{} => {}'.format(key, value))
 
-    context = {'user' : user}
+    context = {'user' : request.session}
     return render(request, 'home.html', context)
    
 
@@ -29,14 +31,16 @@ def login(request):
     if request.method == 'POST':
         user_form = User(email=request.POST.get('username'), password=request.POST.get('password'))
         user = User(email="normal@user.com", password="foo")
+        created_session = datetime.datetime.now()
         
         if  user.password == user_form.password and user.email == user_form.email:
 
-            request.session['email'] = 'normal@user.com'
+            request.session['created_session'] = str(created_session)
+            request.session['email'] = user_form.email
             return redirect("index")
         
         else: 
             error = True
-            
+
     context= {'error': error}
     return render(request, 'login.html', context)
