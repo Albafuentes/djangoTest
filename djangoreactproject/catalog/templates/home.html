@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+    <body>
+        {% block content %} 
+        <p>hello {{user}}</p>
+            <form method="post">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <input type="submit" value="Logout">
+            </form>
+
+            <button onclick="hello">
+                I update object 12345
+            </button>
+        {% endblock content %}
+    </body>
+</html>

@@ -1,27 +1,20 @@
 <!DOCTYPE html>
 <html>
     <body>
-        {% block content %}
-        <div>
-            <form id="login-form" action="" method="post">
-                {% csrf_token %}
+        {% block content %} 
+            <div>
+                <form id="login-form" action="" method="post">
+                    {% csrf_token %}
 
-                <label for="username" class="text-white">Username:</label><br />
-                <input type="text" name="username" id="username" class="form-control" required />
+                    <label for="username" class="text-white">Username:</label><br />
+                    <input type="text" name="username" id="username" class="form-control" required />
 
-                <label for="password" class="text-white">Password:</label><br />
-                <input type="password" name="password" id="password" class="form-control" required />
+                    <label for="password" class="text-white">Password:</label><br />
+                    <input type="password" name="password" id="password" class="form-control" required />
 
-                <input
-                    type="submit"
-                    name="login"
-                    value="log in"
-                />
-            </form>
-        </div>
-
-        <p>logged: {{session}}</p>
-
+                    <input type="submit" name="login" value="log in" />
+                </form>
+            </div>
         {% endblock content %}
     </body>
 </html>
